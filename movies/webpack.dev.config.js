@@ -1,34 +1,15 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const { ENTRY, OUTPUT, MODULE, PLUGINS } = require('./webpack.config.common');
 
 module.exports = {
     mode: 'development',
-    entry: "./src/index.js",
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      clean: true
-    },
+    entry: ENTRY,
+    output: OUTPUT,
     devServer: {
         compress: true,
         port: 9080
     },
-    module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "babel-loader",
-              options: {
-                presets: ['@babel/preset-react']
-              }
-            }
-          },
-        ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./index.html",
-        }),
-      ]
+    module: MODULE,
+    plugins: PLUGINS
   };
