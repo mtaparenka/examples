@@ -1,0 +1,35 @@
+.header-container {
+    max-height: 20%;
+    min-height: 10rem;
+    position: relative;
+    display: block;
+    max-width: 60%;
+    left: 30%;
+}
+
+.add-movie {
+    float: right;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search {
+    position: relative;
+    background: rgba(50, 50, 50, 0.8);
+    width: 50%;    
+}
+
+::placeholder {
+    color: rgb(179, 178, 175);
+}
+
+.styled {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    height: 2rem;
+}

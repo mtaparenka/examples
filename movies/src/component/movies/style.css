@@ -1,0 +1,38 @@
+.movies {
+    position: relative;
+}
+
+.genres {
+    padding-inline-start: 0px;
+    display: inline;
+}
+
+.genres li {
+    display: inline;
+    padding-right: 10px;
+}
+
+.card-container {
+    display: flex;
+    position: relative;
+    flex-flow: wrap;
+    grid-gap: 15px;
+}
+
+#root {
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+.sort-container {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+}
+
+.sort-content {
+    display: inline;
+    float: right;
+    margin-left: auto;
+}

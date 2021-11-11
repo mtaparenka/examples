@@ -1,0 +1,16 @@
+.card {
+    position: relative;
+    max-width: 24%;
+    min-height: 63px;
+    min-width: 186px;
+    max-height: 20%;
+    background-color: rgba(197, 197, 194, 0.384);
+}
+
+.text-right {
+    float: right;
+}
+
+img {
+    width: 100%;
+}

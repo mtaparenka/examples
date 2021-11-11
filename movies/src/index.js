@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ErrorBoundary } from './component/errorBoundary';
+import Heading from './component/heading/heading';
+import Movies from './component/movies/movies';
 
-function App () {
+function App() {
     return (
-        <span>Hello World</span>
+        <>
+            <Heading />
+            <ErrorBoundary>
+                <Movies />
+            </ErrorBoundary>
+        </>
     )
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
