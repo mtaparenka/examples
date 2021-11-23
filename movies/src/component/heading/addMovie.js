@@ -1,8 +1,16 @@
 import React from 'react';
+import Bitmap from './../../../public/Bitmap.png'
 import "./style.css";
 
-export default function AddMovie() {
+const defaultData = {
+    name: "",
+    genre: [],
+    year: "",
+    img: Bitmap
+}
+
+export default function AddMovie(props) {
     return (
-        <button className="add-movie" type="button">+ ADD MOVIE</button>
+        <button className="add-movie" onClick={() => props.showEditorCallback(true, false, "add movie", defaultData)}>+ ADD MOVIE</button>
     )
 }

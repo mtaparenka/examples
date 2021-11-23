@@ -1,21 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import "./style.css";
+import "./MovieCard.css";
+import CardMenu from './cardMenu/cardMenu';
 
-export default function MovieCard(props) {
-    return (
-        <a className="card">
-            <img src={props.img}></img>
-            <h1>{props.name}</h1>
-            <span>{props.genre}</span>
-            <span className="text-right">{props.year}</span>
-        </a>
-    )
+export default class MovieCard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openContextMenu: false
+        }
+
+        this.handleOnContextMenu = this.handleOnContextMenu.bind(this);
+        this.openMenu = this.openMenu.bind(this);
+    }
+
+    render() {
+        return (
+            <a className="card" onContextMenu={(e) => this.handleOnContextMenu(e, true)} >
+                {this.state.openContextMenu ? <CardMenu
+                    clickOutside={this.openMenu}
+                    data={this.props.data}
+                    showEditorCallback={this.props.showEditorCallback}
+                    deleteCallbackHandler={this.props.deleteCallbackHandler} /> : <></>}
+                <img src={this.props.data.img}></img>
+                <h1>{this.props.data.name}</h1>
+                <span>{this.props.data.genre}</span>
+                <span className="text-right">{this.props.data.year}</span>
+            </a>
+        )
+    }
+
+    handleOnContextMenu(e, isOpen) {
+        e.preventDefault();
+        this.openMenu(isOpen)
+    }
+
+    openMenu(isOpen) {
+        this.setState({ openContextMenu: isOpen })
+    }
 }
 
+
+
 MovieCard.propTypes = {
-    img: PropTypes.any.isRequired,
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.array.isRequired,
-    year: PropTypes.string.isRequired
+    data: PropTypes.object.isRequired,
+    showEditorCallback: PropTypes.func.isRequired,
+    deleteCallbackHandler: PropTypes.func.isRequired
 }
