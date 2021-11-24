@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #F65261;
+    letter-spacing: 0.888889px;
+    text-transform: uppercase;
+    mix-blend-mode: normal;
+    opacity: 0.95;
+}
+
+#root {
+    background: #888888;
+}
+
+.movies {
+    position: relative;
+    padding: 20px;
+    background: #232323;
+}
+
+.movies-button {
+    width: 100px;
+    border: none;
+    height: 30px;
+}
+
+.submit {
+    background: #F65261;
+    border-radius: 4px;
+    color: white;
+}
+
+.reset {
+    background: #323232F2;
+    border-radius: 4px;
+    color: #F65261;
+    border: 1.5px solid #F65261;
+}
+
+.genres {
+    padding-inline-start: 0px;
+    display: inline;
+}
+
+.genres li {
+    display: inline;
+    padding-right: 10px;
+}
+
+.card-container {
+    display: flex;
+    position: relative;
+    flex-flow: wrap;
+    grid-gap: 15px;
+}
+
+.sort {
+    margin-left: auto;
+    margin-right: 10%;
+}
+
+.sort-container {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    font-weight: 1;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.sort-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.sort-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.sort-content a:hover {
+    background-color: #f1f1f1
+}
+
+.sort:hover .sort-content {
+    display: block;
+}
+
+/* .sort-container:hover span {
+  background-color: #3e8e41;
+} */

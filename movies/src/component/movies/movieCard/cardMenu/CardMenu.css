@@ -1,0 +1,6 @@
+.card-menu {
+    position: absolute;
+    display: grid;
+    right: 0;
+    top: 0;
+}
