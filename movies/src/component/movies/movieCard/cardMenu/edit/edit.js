@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { OPEN_EDITOR } from '../../../../../store/slice/editorSlice';
 
-export default class Edit extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+export default function Edit(props) {
+    const dispatch = useDispatch()
+    const showEditor = () => dispatch(OPEN_EDITOR({
+        isOpen: true,
+        isEdit: true,
+        title: "edit movie",
+        data: props.data
+    }))
 
-    render() {
-        return (
-            <button onClick={this.props.showEditorCallback}>Edit</button>
-        )
-    }
+    return (
+        <button onClick={showEditor}>Edit</button>
+    )
 }
 
 Edit.propTypes = {
-    showEditorCallback: PropTypes.func.isRequired
+    data: PropTypes.object.isRequired
 }

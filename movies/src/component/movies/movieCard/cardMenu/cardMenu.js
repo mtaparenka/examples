@@ -1,49 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Delete } from './delete/delete';
 import './CardMenu.css';
 import Edit from './edit/edit';
-import { deleteMovie } from '../../../../client/apiClient';
 
-export default class CardMenu extends React.Component {
-    constructor(props) {
-        super(props)
+export default function CardMenu(props) {
+    const ref = useRef(null)
 
-        this.refWrapper = React.createRef()
-        this.handleClickOutside = this.handleClickOutside.bind(this)
-    }
-
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-    }
-
-    render() {
-        return (
-            <div className="card-menu" ref={this.refWrapper}>
-                <Edit
-                    showEditorCallback={() => this.props.showEditorCallback(true, true, "edit movie", this.props.data)}
-                    data={this.props.data} />
-                <Delete 
-                    deleteCallbackHandler={() => this.props.deleteCallbackHandler(true, this.props.data.name)}
-                />
-            </div>
-        )
-    }
-
-    handleClickOutside(e) {
-        if (this.refWrapper && !this.refWrapper.current.contains(e.target)) {
-            this.props.clickOutside(false)
+    const handleClickOutside = (e) => {
+        if (ref && !ref.current.contains(e.target)) {
+            props.openMenuCallback(false)
         }
     }
+
+    useEffect(() => {
+        ref.current.focus()
+        document.addEventListener('mousedown', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    })
+
+    return (
+        <div className="card-menu" ref={ref}>
+            <Edit data={props.data} />
+            <Delete data={props.data} />
+        </div>
+    )
 }
 
 CardMenu.propTypes = {
-    clickOutside: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
-    showEditorCallback: PropTypes.func.isRequired,
-    deleteCallbackHandler: PropTypes.func.isRequired
+    openMenuCallback: PropTypes.func.isRequired
 }

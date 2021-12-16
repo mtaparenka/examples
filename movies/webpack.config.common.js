@@ -22,6 +22,7 @@ MODULE = {
     },
     {
       test: /\.(png|jpe?g|gif)$/i,
+      exclude: /css/,
       use: [
         {
           loader: 'file-loader',
@@ -30,14 +31,18 @@ MODULE = {
     },
     {
       test: /\.css$/i,
-      use: ["style-loader", "css-loader"],
+      use: ["style-loader", {
+        loader: "css-loader", options: {
+          sourceMap: false
+        }
+      }]
     }
   ]
 }
 
 PLUGINS = [
   new HtmlWebpackPlugin({
-      template: "./index.html",
+    template: "./index.html",
   }),
 ]
 
