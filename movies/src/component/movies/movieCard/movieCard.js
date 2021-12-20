@@ -1,49 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import "./MovieCard.css";
 import CardMenu from './cardMenu/cardMenu';
+import { useDispatch } from 'react-redux';
+import { SET_IS_OPEN, SET_SELECTED_MOVIE } from '../../../store/slice/detailsSlice';
 
-export default class MovieCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            openContextMenu: false
-        }
+export default function MovieCard(props) {
+    const [openContextMenu, setOpenContextMenu] = useState(false)
+    const dispatch = useDispatch()
 
-        this.handleOnContextMenu = this.handleOnContextMenu.bind(this);
-        this.openMenu = this.openMenu.bind(this);
+    const openDetails = () => {
+        dispatch(SET_SELECTED_MOVIE(props.data))
+        dispatch(SET_IS_OPEN(true))
     }
 
-    render() {
-        return (
-            <a className="card" onContextMenu={(e) => this.handleOnContextMenu(e, true)} >
-                {this.state.openContextMenu ? <CardMenu
-                    clickOutside={this.openMenu}
-                    data={this.props.data}
-                    showEditorCallback={this.props.showEditorCallback}
-                    deleteCallbackHandler={this.props.deleteCallbackHandler} /> : <></>}
-                <img src={this.props.data.img}></img>
-                <h1>{this.props.data.name}</h1>
-                <span>{this.props.data.genre}</span>
-                <span className="text-right">{this.props.data.year}</span>
-            </a>
-        )
-    }
-
-    handleOnContextMenu(e, isOpen) {
+    const handleOnContextMenu = (e, isOpen) => {
         e.preventDefault();
-        this.openMenu(isOpen)
+        setOpenContextMenu(isOpen)
     }
 
-    openMenu(isOpen) {
-        this.setState({ openContextMenu: isOpen })
-    }
+    return (
+        <div className="card"
+            onContextMenu={(e) => handleOnContextMenu(e, true)}
+            onClick={openDetails}>
+            <img className="card-image" src={props.data.img}></img>
+            <div className="card-details">
+                <div className="card-primary-info">
+                    <div className="card-name">{props.data.name}</div>
+                    <div className="card-date-container">
+                        <div className="card-date">{new Date(props.data.date).getFullYear()}</div>
+                    </div>
+                </div>
+                <div className="card-secondary-info">
+                    <div className="card-genres">{props.data.genre.join(" & ")}</div>
+                </div>
+            </div>
+            {openContextMenu
+                ? <CardMenu
+                    data={props.data}
+                    openMenuCallback={setOpenContextMenu} />
+                : <></>}
+        </div>
+    )
 }
-
-
 
 MovieCard.propTypes = {
     data: PropTypes.object.isRequired,
-    showEditorCallback: PropTypes.func.isRequired,
-    deleteCallbackHandler: PropTypes.func.isRequired
 }
