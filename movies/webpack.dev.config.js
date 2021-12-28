@@ -11,5 +11,10 @@ module.exports = {
         port: 9080
     },
     module: MODULE,
-    plugins: PLUGINS
+    plugins: PLUGINS,
+    externals: {
+        "configData": {
+            API_URL: "http://localhost:4000"    
+        }
+    }
   };

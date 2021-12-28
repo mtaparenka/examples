@@ -1,10 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { deleteMovie, getMovies } from '../../client/apiClient'
+
+export const FETCH_MOVIES = createAsyncThunk("fetchMovies", async () => {
+    const response = await getMovies()
+
+    return response.data
+})
 
 const moviesSlice = createSlice({
     name: "movies",
     initialState: {
-        data: getMovies()
+        data: [],
+        status: "pending"
     },
     reducers: {
         SET_DATA: (state, action) => {
@@ -14,6 +21,12 @@ const moviesSlice = createSlice({
             deleteMovie(action.payload)
             state.data = getMovies()
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(FETCH_MOVIES.fulfilled, (state, action) => {
+            state.data = action.payload
+            state.status = "loaded"
+        })
     }
 })
 

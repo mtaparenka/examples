@@ -19,6 +19,8 @@ export default function MovieCard(props) {
         setOpenContextMenu(isOpen)
     }
 
+    console.log(props.data)
+
     return (
         <div className="card"
             onContextMenu={(e) => handleOnContextMenu(e, true)}
@@ -32,7 +34,7 @@ export default function MovieCard(props) {
                     </div>
                 </div>
                 <div className="card-secondary-info">
-                    <div className="card-genres">{props.data.genre.join(" & ")}</div>
+                    <div className="card-genres">{props.data.genre}</div>
                 </div>
             </div>
             {openContextMenu

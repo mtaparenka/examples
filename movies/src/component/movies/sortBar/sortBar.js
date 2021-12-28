@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getPopularGenres, getSort, sortBy } from '../../../client/apiClient';
+import { getPopularGenres, getSorts, sortBy } from '../../../client/apiClient';
 import { useDispatch, useSelector } from 'react-redux';
 import "./../Movies.css";
 import { SET_DATA } from '../../../store/slice/moviesSlice';
@@ -10,9 +10,8 @@ const sortMap = {
 }
 
 export function SortBar() {
-    const [sorts, setSorts] = useState(getSort())
+    const [sorts, setSorts] = useState(getSorts())
     const [direction, setDirection] = useState("asc")
-    const [sort, setSort] = useState({})
     const [selectedSort, setSelectedSort] = useState(sorts[0])
     const [showSorts, setShowSorts] = useState(false)
 

@@ -1,7 +1,7 @@
 import { v4 } from 'uuid'
 import Bitmap from './../../public/Bitmap.png'
 
-const movies = [
+/* const movies = [
     {
         id: 1,
         name: "Family film",
@@ -68,34 +68,37 @@ const movies = [
         rating: 9.2,
         description: "cool film"
     }
-]
+] */
 
 
-export function getMovies() {
-    return JSON.parse(JSON.stringify(movies))
+export async function getMovies() {
+    const response = await fetch("http://localhost:4000/movies")
+    const json = await response.json()
+
+    return json
 }
 
 export function editMovie(id, movie) {
-    var movieIndex = movies.findIndex((n) => n.id === id)
-    movies[movieIndex] = movie
+    /* var movieIndex = movies.findIndex((n) => n.id === id)
+    movies[movieIndex] = movie */
 }
 
 export function addMovie(movie) {
-    movie.id = v4()
-    movies.push(movie)
+    /* movie.id = v4()
+    movies.push(movie) */
 }
 
 export function deleteMovie(id) {
-    var movieIndex = movies.findIndex((n) => n.id === id)
+    /* var movieIndex = movies.findIndex((n) => n.id === id)
 
-    movies.splice(movieIndex, 1)
+    movies.splice(movieIndex, 1) */
 }
 
 export function sortBy(sort) {
-    let copy = [...movies]
+    /* let copy = [...movies]
     let sorted = copy.sort((d1, d2) => ("" + d1[sort.name]).localeCompare(d2[sort.name]))
 
-    return sort.direction === "asc" ? sorted : sorted.reverse()
+    return sort.direction === "asc" ? sorted : sorted.reverse() */
 }
 
 
@@ -120,7 +123,7 @@ export function getGenres() {
     ]
 }
 
-export function getSort() {
+export function getSorts() {
     return [
         "RELEASE DATE",
         "RATING"
